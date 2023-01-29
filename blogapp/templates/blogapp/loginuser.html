@@ -1,0 +1,18 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block title %} BlogForVocab {% endblock %}
+{% block login %} <a role="link" aria-disabled="true"> Login </a> {% endblock %}
+
+
+{% block content %}
+
+<form action="" method="POST" style="text-align: center;">
+    {% csrf_token %}
+    {{ error }}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+{% endblock %}
+
+

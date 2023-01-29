@@ -1,0 +1,50 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block title %} BlogForVocab {% endblock %}
+
+{% block writeblogurl %}
+<a role="link" aria-disabled="true"> Write Blog</a>
+{% endblock %}
+
+
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+<hr>
+
+<span style="text-align: center;">Write Article</span> <br>
+
+    {{ form1.media }}
+    {{ form1.as_p }}
+
+    <hr>
+
+<span style="text-align: center;">Add Vocab for your article </span> <br> <br>
+
+    Write the <strong> Word </strong> which you want to add in <strong> Vocab Section </strong> then add <strong> colon </strong> character(:), <br> 
+    after the colon character you can explain the <strong> meaning </strong> of the word in context to the article, <br>
+    then press enter which will result in to <strong> go to new line </strong> if you want to add another word in <strong> Vocab Section </strong> <br> 
+    <strong> Refer the below Example: </strong><br>
+    <blockquote> New: Something happening first time <br>
+    Happy: It is a feeling of joy or good feeling <br>
+    Nostalgia: a wistful or excessively sentimental yearning for return to or of some past period or irrecoverable condition </blockquote> <br>
+    Above is example of <strong> three Vocabs </strong> which will be added in <strong> Vocab Section </strong> <br>
+    <h4><strong>Please note you need to add atleast one vocab, <br> 
+    and you need to follow the above rule of adding each word at new line <br> 
+    and adding colon (:) in between word and their meaning. <br>
+    Then only your word will appear correctly in the <strong>Vocab Section</strong></strong> of your article.</h4> <br>
+
+    {{ form2.as_p }}
+    <input type="submit" value="Submit"><br>
+    {{ msg }} <br>
+
+</form>
+
+{% if model1 %}
+<form action="{% url 'detailedblog' model1.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" style="background-color: white; border: 0px; color: blue; text-decoration: underline;">See Your just written Blog</button>
+</form>
+{% endif %}
+{% endblock %}

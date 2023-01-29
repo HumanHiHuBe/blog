@@ -1,0 +1,50 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block title %} BlogForVocab {% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="detailedVocab">
+
+<span style="text-align: center ;"> Detailed Explaination of your word </span> <br> <br> <br>
+
+{% if def %}
+{{ word }} - ( {{ cat }} ) {{ def }} <br> <br>
+
+{% else %}
+
+No definition available for the searched word - {{ word }} <br> <br>
+
+{% endif %}
+
+
+{% if pro %}
+Play to listen it's pronunciation: <br> <br>
+<audio controls>
+    <source src="{{ pro }}" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio> <br> <br>
+{% else %}
+
+<br> <br>
+
+{% endif %}
+
+
+{% if ex1 %}
+Example - {{ ex1 }} <br><br>
+{% else %}
+<br>
+{% endif %}
+
+
+{{ msg }}
+
+
+
+</div>
+
+{% endblock %}

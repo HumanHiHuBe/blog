@@ -1,0 +1,6 @@
+/.venv
+db.sqlite3
+blogapp/__pycache__
+Blog/__pycache__
+blogapp/migrations
+/media

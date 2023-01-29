@@ -1,0 +1,30 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block title %} BlogForVocab {% endblock %}
+
+{% block content %}
+<div class="left">
+    <span style="text-align:center;">Article</span> <br>
+{{ article.title }} <br>
+<strong> Contributed By - {{ article.contributor|capfirst }}</strong> <br>
+{{ article.time_created }} <br>
+{{ article.short_description}} <br>
+<pre>{{ article.content|safe }}</pre> <br>
+Likes: {{ article.likes }} <br>
+<form action="{% url 'likescount' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="article_id" value="{{ article.id }}" hidden>
+    <button type="submit">Like</button>
+</form>
+</div>
+<div class="right">
+    <span style="text-align:center;">Vocab For The Article</span> <br> <br>
+    <span style="text-align:center;">Meaning of the words shown here <span style="font-weight: lighter;">(if any)</span> are provided by <strong>author</strong> of the Blog. <br> <strong>BlogForVocab</strong> does <strong>Not</strong> take any responsibities of these meanings. <br> Click on the word link for more information about the word. <br> </span> <br>
+    {{ msg }}
+    {% for i in words %}
+    <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
+    {% endfor %}  
+    
+</div>
+{% endblock %}
+

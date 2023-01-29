@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Blog Technology Hindi vocabulary Entertainment News Trending">
+    <meta name="description" content="Enhance your Vocabulary">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Base {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'blogapp/home.css' %}">
+    <link rel="shortcut icon" href="{% static 'blogapp/imgs/fav.svg' %}" type="image/x-icon">
+
+
+</head>
+<body>
+    <div class="bodyDiv">
+    <div class="nav">
+        <nav>
+            <a href="{% url 'bloghome' %}">Blog For Vocab</a>           
+            {% if user.is_authenticated %}
+            <form action="{% url 'logoutuser' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% block writeblogurl %} <a href="{% url 'writeblog' %}">Write Blog</a> {% endblock %}
+            {% else %}
+            {% block login %}<a href="{% url 'loginuser' %}">Login</a>{% endblock %}
+            {% block signup %}<a href="{% url 'signupuser' %}">Signup</a>{% endblock %}           
+            {% endif %}
+
+        </nav>
+    </div>
+
+    {% block content %} {% endblock %}
+
+    
+    <footer>
+        Developed with ❤️ by • Pranav Vatsa • Shivank Singh Baghel • Abhishek Kshirsagar <br>
+        © BlogForVocab
+    </footer>
+    
+    <script src="{% static 'blogapp/home.js' %}" ></script>
+</div>
+</body>
+
+</html>
