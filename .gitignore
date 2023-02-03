@@ -4,3 +4,6 @@ blogapp/__pycache__
 Blog/__pycache__
 blogapp/migrations
 /media
+createData.py
+data.json
+data1.json
