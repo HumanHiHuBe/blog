@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Article, CategoryClass, Vocab
-from .forms import ArticleForm, VocabForm
+from .models import Article, CategoryClass, Vocab, Comment, Reply
+from .forms import ArticleForm, VocabForm, CommentForm, ReplyForm
 from django.contrib.auth.decorators import login_required
 from .function import function_to_render_correct_word_meaning, word_dictionary
 from django.core.paginator import Paginator
@@ -55,28 +55,41 @@ def detailedblogs(request, blog_id):
         return HttpResponse("<h1>Forbidden</h1>")
     else:
         d = get_object_or_404(Article, pk=blog_id)
+        com_form = CommentForm()
+        rep_form = ReplyForm()
+        likedUserList = d.liked_user.all()
         d1 = Vocab.objects.get(article_title = d)
         s = str(d1.voc)
         w = function_to_render_correct_word_meaning(s)
         w = w[0]
-        # try:
-        #     w = function_to_render_correct_word_meaning(s)
-        # except:
-        #     return render(request, 'blogapp/detailedblog.html', {'article':d, 'msg':'Format of your Vocab is not correct.'})
-        return render(request, 'blogapp/detailedblog.html', {'article':d, 'words': w})
+        coment_list = Comment.objects.filter(article_tit = d)
+        final_list = []
+        for i in coment_list:
+            final_list.append([i, Reply.objects.filter(original_comment = i)])
+        return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
 
 #view for like habdling
 def likescount(request):
     if request.POST:
         d = get_object_or_404(Article, pk=request.POST['article_id'])
-        d.likes = d.likes + 1
+        likedUserList = d.liked_user.all()
+        if not request.user in likedUserList:
+            d.likes = d.likes + 1
+            d.liked_user.add(request.user)
         d.save()
         d = get_object_or_404(Article, pk=request.POST['article_id'])
         d1 = Vocab.objects.get(article_title = d)
         s = str(d1.voc)
         w = function_to_render_correct_word_meaning(s)
         w = w[0]
-        return render(request, 'blogapp/detailedblog.html', {'article':d, 'words': w})
+        likedUserList = d.liked_user.all()
+        coment_list = Comment.objects.filter(article_tit = d)
+        final_list = []
+        for i in coment_list:
+            final_list.append([i, Reply.objects.filter(original_comment = i)])
+        com_form = CommentForm()
+        rep_form = ReplyForm()
+        return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form,'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
     else:
         return HttpResponse("<h1>Forbidden</h1>")
 
@@ -141,19 +154,81 @@ def writeblog(request):
     else:
         return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg':''})
 
-# def bloghome(request):
-#     if request.method == 'POST':
-#         f = dum(request.POST, request.FILES)
-#         if f.is_valid():
-#             f.save()
-#         else:
-#             return render(request, 'blogapp\home.html', {'form' : dum(),'afterform':f.errors, 'uploaded':''})
-#         try:          
-#             return render(request, 'blogapp\home.html', {'form' : dum(),'afterform':'You have uploaded following items', 'uploaded': fi.objects.get(title = request.POST['title'])})
-#         except:
-#             return render(request, 'blogapp\home.html', {'form' : dum(),'afterform':'You have uploaded following items', 'uploaded': ''})
-#     else:
-#         return render(request, 'blogapp\home.html', {'form' : dum(),'afterform':'', 'uploaded':''})
+def comment(request):
+    if request.method == 'POST':
+        cForm = CommentForm(request.POST)
+        d = get_object_or_404(Article, pk=request.POST['com_article'])
+        if cForm.is_valid():
+            comModel = cForm.save(commit=False)
+            comModel.commented_user = request.user
+            comModel.article_tit = d
+            comModel.save()
+            com_form = CommentForm()
+            rep_form = ReplyForm()
+            likedUserList = d.liked_user.all()
+            d1 = Vocab.objects.get(article_title = d)
+            s = str(d1.voc)
+            w = function_to_render_correct_word_meaning(s)
+            w = w[0]
+            coment_list = Comment.objects.filter(article_tit = d)
+            final_list = []
+            for i in coment_list:
+                final_list.append([i, Reply.objects.filter(original_comment = i)])
+            return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
+        else:
+            com_form = CommentForm()
+            rep_form = ReplyForm()
+            likedUserList = d.liked_user.all()
+            d1 = Vocab.objects.get(article_title = d)
+            s = str(d1.voc)
+            w = function_to_render_correct_word_meaning(s)
+            w = w[0]
+            coment_list = Comment.objects.filter(article_tit = d)
+            final_list = []
+            for i in coment_list:
+                final_list.append([i, Reply.objects.filter(original_comment = i)])
+            return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list, 'msg':'Please Correct The Input And Re-Submit'})
+    else:
+        return HttpResponse("<h1>Forbidden</h1>")
+
+    
+def reply(request):
+    if request.method == 'POST':
+        rForm = ReplyForm(request.POST)
+        e = get_object_or_404(Comment, pk=request.POST['orig_com'])
+        d = get_object_or_404(Article, pk=request.POST['com_article'])
+        if rForm.is_valid():
+            repModel = rForm.save(commit=False)
+            repModel.replying_user = request.user
+            repModel.original_comment = e
+            repModel.save()
+            com_form = CommentForm()
+            rep_form = ReplyForm()
+            likedUserList = d.liked_user.all()
+            d1 = Vocab.objects.get(article_title = d)
+            s = str(d1.voc)
+            w = function_to_render_correct_word_meaning(s)
+            w = w[0]
+            coment_list = Comment.objects.filter(article_tit = d)
+            final_list = []
+            for i in coment_list:
+                final_list.append([i, Reply.objects.filter(original_comment = i)])
+            return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
+        else:
+            com_form = CommentForm()
+            rep_form = ReplyForm()
+            likedUserList = d.liked_user.all()
+            d1 = Vocab.objects.get(article_title = d)
+            s = str(d1.voc)
+            w = function_to_render_correct_word_meaning(s)
+            w = w[0]
+            coment_list = Comment.objects.filter(article_tit = d)
+            final_list = []
+            for i in coment_list:
+                final_list.append([i, Reply.objects.filter(original_comment = i)])
+            return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list, 'msg':'Please Correct The Input And Re-Submit'})
+    else:
+        return HttpResponse("<h1>Forbidden</h1>")
 
 
 

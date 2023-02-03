@@ -5,7 +5,7 @@
 {% block content %}
 <h3>{{ count }} {{ blog_category }} blog{{count|pluralize}} available</h3>
 {% for i in page_obj %}
-<form action="{% url 'detailedblog' i.id %}" method="POST">
+<form action="{% url 'detailedblog' i.id  %}" method="POST">
     {% csrf_token %}
     <button type="submit" style="background-color: white; border: 0px; color: blue; text-decoration: underline;">{{i.title}}</button>
 </form>

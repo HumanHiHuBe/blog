@@ -1,0 +1,38 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "password": "Django@123",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "vatsa3",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-29T05:10:00.265Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 4,
+        "fields": {
+            "password": "Django@123",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "vatsa4",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-29T05:10:00.265Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

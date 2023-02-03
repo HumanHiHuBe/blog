@@ -24,4 +24,11 @@ urlpatterns = [
     #LikesCount
     path('likescount', views.likescount, name = 'likescount'),
 
+    #Comment
+    path('comment', views.comment, name='comment'),
+
+    #Reply
+    path('reply', views.reply, name='reply')
+
+
 ]
