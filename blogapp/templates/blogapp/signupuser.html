@@ -4,5 +4,13 @@
 {% block signup %} <a role="link" aria-disabled="true"> Signup </a> {% endblock %}
 
 {% block content %}
-<h1 style="text-align: center;">We Are Not Accepting Any New Account At the Moment <br> Stay Tuned, Building something Exciting!</h1>
+<h1>Sign Up</h1>
+<div>
+    <form action="{% url 'signupuser' %}" method="post">
+        {% csrf_token %}
+        {{ error }}
+        {{ form.as_p }}
+        <input type="submit" value="SignUp">
+    </form>
+</div>
 {% endblock %}

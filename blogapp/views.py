@@ -1,6 +1,6 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Article, CategoryClass, Vocab, Comment, Reply
@@ -20,8 +20,18 @@ def bloghome(request):
     return render(request, 'blogapp/bloghome.html', {'page_obj' : page_obj})
 
 #Auth Views
-def signupuser(request): 
-    return render(request, 'blogapp/signupuser.html')
+def signupuser(request):
+    if request.method == 'GET': 
+        return render(request, 'blogapp/signupuser.html', {'form':UserCreationForm()})
+    else:
+        userform = UserCreationForm(request.POST)
+        if userform.is_valid():
+            user = userform.save(commit=False)
+            user.save()
+        else:
+            return render(request, 'blogapp/signupuser.html', {'form':UserCreationForm(), 'error':userform.errors})
+    login(request, user)
+    return redirect('bloghome')
 
 def loginuser(request):
     if request.method == 'GET':
