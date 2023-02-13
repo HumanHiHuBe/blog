@@ -70,7 +70,6 @@
 }
 
 /* Nav */
-/* For Mobile */
 .navb{
     display: flex;
     width: 80vw;
@@ -80,6 +79,7 @@
 
 .navb div a{
     text-decoration: none;
+    color: rgba(132, 0, 255, 0.833);
 }
 .fir{
     align-content: start;
@@ -88,11 +88,12 @@
     margin-left: auto;
     margin-right: 1vw;  
 }
+/* For Mobile */
 @media screen and (max-width : 500px) {
     .navb{
         display: flex;
-        width: 100vw;
-        margin-left: 0;
+        width: 98vw;
+        margin-left: 1vw;
         font-size: 1.2rem;
         flex-wrap: nowrap;
     }
