@@ -10,38 +10,50 @@
     <title>{% block title %} Base {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'blogapp/home.css' %}">
     <link rel="shortcut icon" href="{% static 'blogapp/imgs/fav.svg' %}" type="image/x-icon">
-
-
 </head>
 <body>
     <div class="bodyDiv">
-    <div class="nav">
-        <nav>
-            <a href="{% url 'bloghome' %}">Blog For Vocab</a>           
-            {% if user.is_authenticated %}
-            <form action="{% url 'logoutuser' %}" method="POST" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-            {% block writeblogurl %} <a href="{% url 'writeblog' %}">Write Blog</a> {% endblock %}
-            {% else %}
-            {% block login %}<a href="{% url 'loginuser' %}">Login</a>{% endblock %}
-            {% block signup %}<a href="{% url 'signupuser' %}">Signup</a>{% endblock %}           
-            {% endif %}
+        <div class="navDiv">
+            <nav>
+                <div class="navb">
+                        <div class="fir"><a href="{% url 'bloghome' %}" class="fir">Blog For Vocab</a></div>
+                        {% if user.is_authenticated %}
+                        <div class="seco"><form action="{% url 'logoutuser' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form></div>
+                        <div class="thir">{% block writeblogurl %} <a href="{% url 'writeblog' %}" class="thir">Write Blog</a> {% endblock %}</div>
+                        {% else %}
+                        <div class="seco">{% block login %}<a href="{% url 'loginuser' %}" class="seco">Login</a>{% endblock %}</div>
+                        <div class="thir">{% block signup %}<a href="{% url 'signupuser' %}" class="thir">Sign Up</a>{% endblock %}</div>
+                        {% endif %}
+                </div>
+            </nav>
+        </div>
 
-        </nav>
-    </div>
 
-    {% block content %} {% endblock %}
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
 
-    
-    <footer>
-        Developed with ❤️ by • Pranav Vatsa • Shivank Singh Baghel • Abhishek Kshirsagar <br>
-        © BlogForVocab
-    </footer>
+        <div class="footerDiv">
+            <footer>
+                <div id="footer">
+                    <div id="fl">
+                        Developed with ❤️ In <span class="bolder"> India </span>  by <span class="bolder"> • Pranav Vatsa </span>  <br>
+                    </div>
+                    <div class="sicon">
+                        <div class="g"><a href="https://github.com/HumanHiHuBe/blog" target="_blank"><img src="{% static 'blogapp/imgs/github.svg' %}" alt="Github Icon For this Link"></a></div>
+                        <div class="l"><a href="https://www.linkedin.com/in/humanhu/" target="_blank"><img src="{% static 'blogapp/imgs/linkedin.png' %}" alt="LinkedIn Icon For LinkedIn Profile Link"></a></div>
+                    </div>
+                    <div id="sl">
+                        <span class="bolder"> © BlogForVocab </span>
+                    </div>
+                </div>
+            </footer>
+        </div>
     
     <script src="{% static 'blogapp/home.js' %}" ></script>
-</div>
+    </div>
 </body>
-
 </html>

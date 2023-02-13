@@ -4,9 +4,13 @@
 
 {% block content %}
 
-{% for i in page_obj %}
-<a href="{%  url 'bloglist' i.category %}">{{ i.category }}</a> <br>
-{% endfor %}
+<div class="bloglist">
+    {% for i in page_obj %}
+    <div class="indBlog">
+        <a href="{%  url 'bloglist' i.category %}">{{ i.category }}</a> <br>
+    </div>
+    {% endfor %}
+</div>
 
 <div class="pagination">
     <span class="step-links">
