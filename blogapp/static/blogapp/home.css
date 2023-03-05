@@ -79,8 +79,16 @@
 
 .navb div a{
     text-decoration: none;
-    color: rgba(132, 0, 255, 0.833);
+    color: purple
 }
+
+#logoutbtn{
+    border: none;
+    background-color: transparent;
+    color: purple;
+    font-size: 1.2rem;
+}
+
 .fir{
     align-content: start;
 }
@@ -109,3 +117,94 @@
         margin-right: 1vw;  
     }
 }
+
+/* Content Div */
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 50vh;
+    margin-top: 10vh;
+    margin-left: 8vh;
+}
+
+@media screen and (max-width : 500px) {
+    .content{
+        margin-left: 2vh;
+    }
+}
+.bloglist .indBlog a{
+    text-decoration: none;
+    color: coral;
+    font-size: 1.8rem;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: white;
+    -webkit-text-fill-color: transparent;
+}
+.bloglist{
+    display: flex;
+    flex-direction: column;
+}
+.bloglist .indBlog{
+    border: 2px dashed purple;
+    padding-left: 45%;
+    margin: 2vh;
+    white-space: nowrap;
+    object-fit: contain;
+}
+
+@media screen and (max-width : 500px) {
+    .bloglist .indBlog{
+        border: 2px dashed purple;
+        padding-left: 19vw;
+        margin: 1vh;
+        cursor: pointer;
+        white-space: nowrap;
+        object-fit: contain;
+    }
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    font-size: 1.6rem;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.pagination a{
+    text-decoration: none;
+    color: purple;
+}
+.current{
+    color: bl;
+}
+
+@media screen and (max-width : 500px) {
+    .pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 5vh;
+        font-size: 1rem;
+        font-weight: bolder;
+        margin-left: -2vh;
+        margin-right: 0;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        text-decoration: none;
+    }
+    .pagination a{
+        text-decoration: none;
+        color: purple;
+    }
+}
+
+
+
+
+
+

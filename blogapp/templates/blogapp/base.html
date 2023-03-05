@@ -20,7 +20,7 @@
                         {% if user.is_authenticated %}
                         <div class="seco"><form action="{% url 'logoutuser' %}" method="POST" style="display: inline;">
                             {% csrf_token %}
-                            <button type="submit">Logout</button>
+                            <button type="submit" id="logoutbtn">Logout</button>
                         </form></div>
                         <div class="thir">{% block writeblogurl %} <a href="{% url 'writeblog' %}" class="thir">Write Blog</a> {% endblock %}</div>
                         {% else %}
@@ -52,8 +52,9 @@
                 </div>
             </footer>
         </div>
+    </div>
     
     <script src="{% static 'blogapp/home.js' %}" ></script>
-    </div>
+    
 </body>
 </html>
