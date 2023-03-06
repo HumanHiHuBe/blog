@@ -3,23 +3,31 @@
 {% block title %} BlogForVocab {% endblock %}
 
 {% block content %}
-<h3>{{ count }} {{ blog_category }} blog{{count|pluralize}} available</h3>
+<div class="wrrapernoofbloginfo">
+<div class="noofbloginfo">
+<span class="textofnbli"><h3>{{ count }} {{ blog_category }} blog{{count|pluralize}} available</h3></span>
+</div>
+</div>
+<div class="bloglists">
 {% for i in page_obj %}
+<div class="indbloglists">
 <form action="{% url 'detailedblog' i.id  %}" method="POST">
     {% csrf_token %}
-    <button type="submit" style="background-color: white; border: 0px; color: blue; text-decoration: underline;">{{i.title}}</button>
+    <button type="submit"><h2>{{i.title|upper}}</h2></button>
 </form>
 <strong> Contributed By - {{ i.contributor|capfirst }}</strong>
 {{ i.time_created }} <br>
-{{ i.short_description}} <br>
+<div class="shortdesc">{{ i.short_description}} <br></div>
 {{ i.content|safe|truncatechars:300 }} <br>
+</div>
 {% endfor %}
+</div>
 
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous| </a>
         {% endif %}
 
         <span class="current">
@@ -27,8 +35,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}"> |Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
         {% endif %}
     </span>
 </div>
