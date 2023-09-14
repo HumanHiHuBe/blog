@@ -251,13 +251,81 @@
     background-color: white;
     font-size: 1.6rem;
     color: purple;
+    cursor: pointer;
+}
+
+#formLogin > p> input{
+    border: none;
+    border-bottom: 1px solid purple;
+    padding: 5px;
+    margin-bottom: 10px;
+    /* width: max-content; */
+}
+
+#formLogin > button{
+    border: 1px solid purple;
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: larger;
+    font-weight: bolder;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+
+#formLogin > button:hover{
+    box-shadow: 0 5px 15px rgba(130, 39, 122, 0.4);
 }
 
 
+#formLogin > p> input:focus{
+    outline: none;
+}
 
+#formLogin > p > label{
+    display: none;
+}
 
+#formLogin > p > span{
+    display: none;
+}
 
+#formLogin > ul{
+    display: none;
+}
 
+#lastDivInp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 0.5 0.5 auto;
+}
 
+#formDiv{
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* border: 5px solid black;    */
+}
 
-
+#formInnerDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px dashed purple;
+    flex: 0.9 auto;
+    width: 100%;
+}

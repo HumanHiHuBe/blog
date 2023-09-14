@@ -4,13 +4,18 @@
 {% block signup %} <a role="link" aria-disabled="true"> Signup </a> {% endblock %}
 
 {% block content %}
-<h1>Sign Up</h1>
-<div>
-    <form action="{% url 'signupuser' %}" method="post">
-        {% csrf_token %}
-        {{ error }}
-        {{ form.as_p }}
-        <input type="submit" value="SignUp">
-    </form>
+
+<div id="formDiv">
+    <div id="formInnerDiv">
+        <div id="lastDivInp">
+            <form action="{% url 'signupuser' %}" id="formLogin" method="post">
+                {% csrf_token %}
+                {{ error }}
+                {{ form.as_p }}
+                <button type="submit">SignUp</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

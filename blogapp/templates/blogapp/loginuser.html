@@ -6,12 +6,18 @@
 
 {% block content %}
 
-<form action="" method="POST" style="text-align: center;">
-    {% csrf_token %}
-    {{ error }}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
+<div id="formDiv">
+    <div id="formInnerDiv">
+        <div id="lastDivInp">
+            <form action="" id="formLogin" method="POST" style="text-align: center;">
+                {% csrf_token %}
+                {{ error }}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
