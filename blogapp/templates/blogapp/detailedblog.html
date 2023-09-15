@@ -3,79 +3,86 @@
 {% block title %} BlogForVocab {% endblock %}
 
 {% block content %}
-<div class="left">
-    {{ article.title }} <br>
-    <strong> Contributed By - {{ article.contributor|capfirst }}</strong> <br>
-    {{ article.time_created }} <br>
-    {{ article.short_description}} <br>
-    <pre>{{ article.content|safe }}</pre> <br>
-    {% if user.is_authenticated %}
-    Likes: {{ article.likes }} <br>
-    {% if user.is_authenticated %}
-    <form action="{% url 'likescount' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="article_id" value="{{ article.id }}" hidden>
-        <button type="submit">Like</button>
-    </form>
-    {% endif %}
-    {% for i in likedUserList %}
+<div id="dBlogWr">
+    <div class="left">
+        {{ article.title }} <br>
+        <strong> Contributed By - {{ article.contributor|capfirst }}</strong> <br>
+        {{ article.time_created }} <br>
+        {{ article.short_description}} <br>
+        <pre>{{ article.content|safe }}</pre> <br>
+        {% if user.is_authenticated %}
+        Likes: {{ article.likes }} <br>
+        {% if user.is_authenticated %}
+        <form action="{% url 'likescount' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="article_id" value="{{ article.id }}" hidden>
+            <button type="submit">Like</button>
+        </form>
+        {% endif %}
+        {% for i in likedUserList %}
         {{ i }}
-    {% endfor %}
-    <br>
+        {% endfor %}
+        <br>
 
-    <span>-------------Comment & Reply----------</span> <br>
-    <form action="{% url 'comment' %}" method="post">
-        {% csrf_token %}
-        {{ com_form }}
-        <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-        <input type="submit" value="Comment">
-    </form>
+        <span>-------------Comment & Reply----------</span> <br>
+        <form action="{% url 'comment' %}" method="post">
+            {% csrf_token %}
+            {{ com_form }}
+            <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
+            <!-- <input type="submit" value="Comment"> -->
+            <button type="submit">Comment</button>
+        </form>
 
 
 
-    <br>
-    {% for i in final_list %}
-    {% for j in i %}
-    {% if forloop.first %}
-    {{ j.commented_user }} <br>
-    {{ j.comment_text }} <br>
-    <div class="ReplyDiv" >
-    <form action="{% url 'reply' %}" method="post">
-        {% csrf_token %}
-        {{ rep_form }}
-        <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-        <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
-        <input type="submit" value="Reply">
-    </form>
+        <br>
+        {% for i in final_list %}
+        {% for j in i %}
+        {% if forloop.first %}
+        {{ j.commented_user }} <br>
+        {{ j.comment_text }} <br>
+        <div class="ReplyDiv">
+            <form action="{% url 'reply' %}" method="post">
+                {% csrf_token %}
+                {{ rep_form }}
+                <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
+                <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
+                <!-- <input type="submit" value="Reply"> -->
+                <button type="submit">Reply</button>
+            </form>
+        </div>
+        {% endif %}
+        {% if forloop.last %}
+        {% for k in j %}
+        <blockquote>
+            {{ k.replying_user }} <br>
+            {{ k.reply_text }} <br>
+            <div class="ReplyDiv">
+                <form action="{% url 'reply' %}" method="post">
+                    {% csrf_token %}
+                    {{ rep_form }}
+                    <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
+                    <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
+                    <!-- <input type="submit" value="Reply"> -->
+                    <button type="submit">Reply</button>
+                </form>
+            </div>
+        </blockquote>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
     </div>
-    {% endif %}
-    {% if forloop.last %}
-    {% for k in j %}
-    <blockquote>
-        {{ k.replying_user }} <br>
-    {{ k.reply_text }} <br>
-    <div class="ReplyDiv">
-    <form action="{% url 'reply' %}" method="post">
-        {% csrf_token %}
-        {{ rep_form }}
-        <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-        <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
-        <input type="submit" value="Reply">
-    </form>
+    <div class="right">
+        <span>Vocab For The Article</span> <br> <br>
+        <span>Meaning of the words shown here <span>(if any)</span> are provided by <strong>author</strong> of the Blog.
+            <br> <strong>BlogForVocab</strong> does <strong>Not</strong> take any responsibities of these meanings. <br>
+            Click on the word link for more information about the word. <br> </span> <br>
+        {{ msg }}
+        {% for i in words %}
+        <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
+        {% endfor %}
     </div>
-    </blockquote>
-    {% endfor %}
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
-{% endif %}
-</div>
-<div class="right">
-    <span>Vocab For The Article</span> <br> <br>
-    <span>Meaning of the words shown here <span>(if any)</span> are provided by <strong>author</strong> of the Blog. <br> <strong>BlogForVocab</strong> does <strong>Not</strong> take any responsibities of these meanings. <br> Click on the word link for more information about the word. <br> </span> <br>
-    {{ msg }}
-    {% for i in words %}
-    <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
-    {% endfor %}  
 </div>
 {% endblock %}

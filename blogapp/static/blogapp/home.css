@@ -87,6 +87,7 @@
     background-color: transparent;
     color: purple;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .fir{
@@ -146,10 +147,12 @@
     color: white;
     -webkit-text-fill-color: transparent;
 }
+
 .bloglist{
     display: flex;
     flex-direction: column;
 }
+
 .bloglist .indBlog{
     border: 2px dashed purple;
     padding-left: 45%;
@@ -328,4 +331,71 @@
     border: 2px dashed purple;
     flex: 0.9 auto;
     width: 100%;
+}
+
+
+/* Last page (detailed Blog page) */
+/* For laptop */
+@media screen and (min-width : 500px) {
+    #dBlogWr{
+        border: 3px dashed purple;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex: auto;
+
+        text-decoration: none;
+        font-size: 1.8rem;
+        
+    }
+    
+    .left{
+        /* border: 5px solid black; */
+        margin: 5px;
+        flex: auto;
+        padding: 10px;
+    }
+
+    .left button{
+        cursor: pointer;
+    }
+    
+    
+    .right{
+        border-left: 2px dashed purple;
+        margin: 5px;
+        flex: auto;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    .right a{
+        text-decoration: none;
+    }
+
+    /* Bloghome */
+    .bloglist .indBlog a{
+        text-decoration: none;
+        color: coral;
+        font-size: 1.8rem;
+        background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: white;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bloglist{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bloglist .indBlog{
+        border: 2px dashed purple;
+        padding-left: 45%;
+        margin: 2vh;
+        white-space: nowrap;
+        object-fit: contain;
+    }
+
 }
