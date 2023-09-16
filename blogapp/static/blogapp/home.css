@@ -342,17 +342,16 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        flex: auto;
-
+        flex: 1,1, auto;
         text-decoration: none;
         font-size: 1.8rem;
         
     }
     
     .left{
-        /* border: 5px solid black; */
         margin: 5px;
-        flex: auto;
+        flex: 0.7 auto;
+        width: 70%;
         padding: 10px;
     }
 
@@ -364,7 +363,8 @@
     .right{
         border-left: 2px dashed purple;
         margin: 5px;
-        flex: auto;
+        flex: 0.3 auto;
+        width: 30%;
         padding: 10px;
         text-decoration: none;
     }
@@ -398,4 +398,57 @@
         object-fit: contain;
     }
 
+}
+
+.tDiv{
+    flex: 1,1 auto;
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.iDiv{
+    flex: 1,1 auto;
+    text-align: left;
+    font-weight: lighter;
+    font-size: small;
+}
+
+.dbContent{
+    flex: 1,1 auto;
+    text-align: justify;
+}
+
+.lncDiv{
+    border-bottom: 2px dashed purple;
+    margin-bottom: 10px;
+}
+
+#formLike > button{
+    border: 1px solid purple;
+    width: max-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+
+#formLike > button:hover{
+    box-shadow: 0 5px 15px rgba(130, 39, 122, 0.4);
+}
+
+#likedUserDiv{
+    flex: 1,1, auto;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 100px;   
 }

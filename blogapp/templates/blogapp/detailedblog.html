@@ -5,24 +5,32 @@
 {% block content %}
 <div id="dBlogWr">
     <div class="left">
-        {{ article.title }} <br>
-        <strong> Contributed By - {{ article.contributor|capfirst }}</strong> <br>
-        {{ article.time_created }} <br>
-        {{ article.short_description}} <br>
-        <pre>{{ article.content|safe }}</pre> <br>
+        <div class="tDiv">{{ article.title }}</div>
+        <div class="iDiv">
+            <strong>Contributed By - {{ article.contributor|capfirst }}</strong> <br>
+            {{ article.time_created }} <br>
+        </div>
+        <div class="dbContent">
+            {{ article.content|safe }} <br>
+        </div>
         {% if user.is_authenticated %}
-        Likes: {{ article.likes }} <br>
+        <p style="color: purple; display: inline;">Liked by: {{ article.likes }}</p> <br>
         {% if user.is_authenticated %}
-        <form action="{% url 'likescount' %}" method="POST">
+        <form action="{% url 'likescount' %}" method="POST" id="formLike">
             {% csrf_token %}
             <input type="text" name="article_id" value="{{ article.id }}" hidden>
-            <button type="submit">Like</button>
+            <button type="submit">Click to Like</button>
         </form>
         {% endif %}
-        {% for i in likedUserList %}
-        {{ i }}
-        {% endfor %}
+        <div id="likedUserDiv">
+            Liked by users:
+            {% for i in likedUserList %}
+            {{ i }}
+            {% endfor %}
+        </div>
         <br>
+        <div style="flex: 1,1,auto; border-bottom: 2px dashed purple;"></div>
+        
 
         <span>-------------Comment & Reply----------</span> <br>
         <form action="{% url 'comment' %}" method="post">
