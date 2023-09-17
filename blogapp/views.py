@@ -149,7 +149,7 @@ def individualvocab(request, vocab):
                 
         return render(request, 'blogapp/individualvocab.html', d)
     else:
-        return render(request, 'blogapp/individualvocab.html', {'word':vocab, 'code':int(q[0].status_code) , 'msg':'Maybe Some Error Occured, Please Retry Only Once If Did Not Work Then Maybe There Is No More Detail Available For Your Searched Word, - {}.'.format(vocab)})
+        return render(request, 'blogapp/individualvocab.html', {'word':vocab, 'code':int(q[0].status_code) , 'msg':'Maybe Some Error Occured, Please Retry Only Once If Did Not Work Then Maybe There Is No More Detail Available For Your Searched Word - {}.'.format(vocab)})
 
 
 #View for writing blog

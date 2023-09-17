@@ -9,42 +9,40 @@
 
 <div class="detailedVocab">
 
-<span style="text-align: center ;"> Detailed Explaination of your word </span> <br> <br> <br>
+  <div class="tDiv">Detailed explaination of the word</div>
 
-{% if def %}
-{{ word }} - ( {{ cat }} ) {{ def }} <br> <br>
+  {% if def %}
+  <div class="lD"> Definition: </div>
+  <div class="rLd">
+    {{ word }} - ( {{ cat }} ) {{ def }}.
+  </div>
+  {% else %}
+  <div class="rLd">
+    No definition available for the searched word - {{ word }}.
+  </div>
+  {% endif %}
 
-{% else %}
+  {% if pro %}
+  <div class="lD">Play the pronunciation:</div>
+  <div class="rLd">
+    <audio controls>
+      <source src="{{ pro }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+    {% else %}
+    <div class="rLd">
+    </div>
+  {% endif %}
 
-No definition available for the searched word - {{ word }} <br> <br>
-
-{% endif %}
-
-
-{% if pro %}
-Play to listen it's pronunciation: <br> <br>
-<audio controls>
-    <source src="{{ pro }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-  </audio> <br> <br>
-{% else %}
-
-<br> <br>
-
-{% endif %}
-
-
-{% if ex1 %}
-Example - {{ ex1 }} <br><br>
-{% else %}
-<br>
-{% endif %}
-
-
-{{ msg }}
-
-
-
+  {% if ex1 %}
+  <div class="lD">Used Example:</div>
+  <div class="rLd">&#x2022; {{ ex1|capfirst }}.
+  </div>
+  {% else %}
+  <div class="rLd"></div>
+  {% endif %}
+  <div class="rLd">{{ msg }}</div>
 </div>
 
 {% endblock %}

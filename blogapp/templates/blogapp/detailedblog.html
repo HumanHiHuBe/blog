@@ -24,9 +24,13 @@
         {% endif %}
         <div id="likedUserDiv">
             Liked by users:
+            {% if likedUserList %}
             {% for i in likedUserList %}
             {{ i }}
             {% endfor %}
+            {% else %}
+            <span style="font-weight: bold;">You could be first one to like it </span>
+            {% endif %}
         </div>
         <br>
         <div style="flex: 1,1,auto; border-bottom: 2px dashed purple;"></div>
@@ -91,7 +95,7 @@
             Click on the word link for more information about the word. <br> </span> <br>
         {{ msg }}
         {% for i in words %}
-        &#x2022; <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
+        <span>&#x2022; </span><a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }}<br><br>
         {% endfor %}
     </div>
 </div>

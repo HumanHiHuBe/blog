@@ -7,8 +7,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 class CategoryClass(models.Model):
-    category = models.CharField(max_length = 100)
-
+    category = models.CharField(max_length = 100, unique=True)
     def __str__(self):
         return self.category
 

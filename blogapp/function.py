@@ -17,9 +17,8 @@ def function_to_render_correct_word_meaning(s):
     meaning_of_the_word = []
     for i in range(len(new_l)):
         if len(new_l[i]) > 1:
-            if new_l[i][0].strip().isalpha() & new_l[i][1].strip().isalpha():
-                word.append(new_l[i][0].strip())
-                meaning_of_the_word.append(new_l[i][1].strip())
+            word.append(new_l[i][0].strip())
+            meaning_of_the_word.append(new_l[i][1].strip())
     d=[]
     for i in range(len(word)):
         d.append({'word':word[i], 'meaning':meaning_of_the_word[i]})
