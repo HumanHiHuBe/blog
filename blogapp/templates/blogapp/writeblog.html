@@ -2,49 +2,48 @@
 {% load static %}
 {% block title %} BlogForVocab {% endblock %}
 
-{% block writeblogurl %}
-<a role="link" aria-disabled="true"> Write Blog</a>
-{% endblock %}
-
-
 {% block content %}
+<div class="wrBlog">
+    <form action="" method="POST">
+        <div class="wBlog">
+            {% csrf_token %}
+            <div class="wTdiv">Write Your Own Blog</div>
+            {{ form1.media }}
+            <table>
+                {{ form1.as_table }}
+            </table>
+        </div>
+        <div class="wVocab">
+            <div class="wTdiv">Add Vocab for your article</div>
+            <div class="instructionWrBlog">
+                &#x2022; Write the <strong>WORD</strong> which you want to add in <strong>VOCAB SECTION</strong> in the below <strong>INPUT BOX</strong> then add <strong>COLON CHARACTER (:)</strong>, <br> 
+                after the colon character you can explain the <strong>MEANING</strong> of the word in context to the <strong>ARTICLE</strong>,<br>
+                then press enter which will result into going to a <strong>NEW LINE</strong>, if you want to add <strong>ANOTHER WORD</strong> in the <strong>VOCAB SECTION</strong>, you can follow the same <strong>ABOVE INSTRUCTIONS</strong> again. <br> 
+                <br>
+                <strong> Please refer the below Example: </strong><br>
+                &#x2022; New: Something happening first time <br>
+                &#x2022; Happy: It is a feeling of joy or good feeling <br>
+                &#x2022; Nostalgia: a wistful or excessively sentimental yearning for return to or of some past period or irrecoverable condition </blockquote> <br>
+                Above is example of <strong> three Vocabs </strong> which will be added in <strong>VOCAB SECTION OF THE ARTICLE.</strong> <br>
+                <br>
+                <h4><strong>&#x2022; Please note that you need to add atleast one vocab, <br> 
+                &#x2022; and you need to follow the above rule of adding each word at new line <br> 
+                &#x2022; and adding colon (:) in between the word and their meaning. <br>
+                &#x2022; Then only your word will appear correctly in the <strong>VOCAB SECTION OF YOUR ARTICLE.</strong></h4><br>
+            </div>
+            <table>
+                {{ form2.as_table }}
+            </table>
+            <button type="submit">Submit</button><br>
+            <span style="color: purple; font-size: larger; font-weight: bolder;">{{ msg }}</span> <br>
+        </div>
+    </form>
 
-<form action="" method="POST">
-    {% csrf_token %}
-<hr>
-
-<span style="text-align: center;">Write Article</span> <br>
-
-    {{ form1.media }}
-    {{ form1.as_p }}
-
-    <hr>
-
-<span style="text-align: center;">Add Vocab for your article </span> <br> <br>
-
-    Write the <strong> Word </strong> which you want to add in <strong> Vocab Section </strong> then add <strong> colon </strong> character(:), <br> 
-    after the colon character you can explain the <strong> meaning </strong> of the word in context to the article, <br>
-    then press enter which will result in to <strong> go to new line </strong> if you want to add another word in <strong> Vocab Section </strong> <br> 
-    <strong> Refer the below Example: </strong><br>
-    <blockquote> New: Something happening first time <br>
-    Happy: It is a feeling of joy or good feeling <br>
-    Nostalgia: a wistful or excessively sentimental yearning for return to or of some past period or irrecoverable condition </blockquote> <br>
-    Above is example of <strong> three Vocabs </strong> which will be added in <strong> Vocab Section </strong> <br>
-    <h4><strong>Please note you need to add atleast one vocab, <br> 
-    and you need to follow the above rule of adding each word at new line <br> 
-    and adding colon (:) in between word and their meaning. <br>
-    Then only your word will appear correctly in the <strong>Vocab Section</strong></strong> of your article.</h4> <br>
-
-    {{ form2.as_p }}
-    <input type="submit" value="Submit"><br>
-    {{ msg }} <br>
-
-</form>
-
-{% if model1 %}
-<form action="{% url 'detailedblog' model1.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" style="background-color: white; border: 0px; color: blue; text-decoration: underline;">See Your just written Blog</button>
-</form>
-{% endif %}
+    {% if model1 %}
+    <form action="{% url 'detailedblog' model1.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">See Your just written Blog</button>
+    </form>
+    {% endif %}
+</div>
 {% endblock %}

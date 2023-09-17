@@ -610,3 +610,96 @@
     font-size: large;
 }
 
+.wrBlog{
+    border: 3px dashed purple;
+    padding: 2% 3% 2% 3%;
+    margin-bottom: 10px;
+    text-align: justify;
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+}
+
+.wTdiv{
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.wrBlog input{
+    border: none;
+    border-bottom: 1px solid purple;
+    padding: 5px;
+    color: purple;
+    font-size: large;
+    margin-bottom: 1%;
+}
+
+.wrBlog input:focus{
+    outline: none;
+}
+
+.wrBlog button{
+    border: 1px solid purple;
+    width: max-content;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+
+.wrBlog button:hover{
+    box-shadow: 0 5px 15px rgba(130, 39, 122, 0.4);
+}
+
+.wrBlog textarea{
+    border: none;
+    border-bottom: 1px solid purple;
+    border-top: 1px solid purple;
+    padding: 5px;
+    color: purple;
+    font-size: large;
+    margin-bottom: 1%;
+}
+
+.wrBlog textarea:focus{
+    outline: none;
+}
+
+.wrBlog select{
+    border: none;
+    /* border-bottom: 1px solid purple; */
+    padding: 5px;
+    color: purple;
+    font-size: large;
+    margin-bottom: 1%;
+    text-align: justify;
+}
+
+.wrBlog select:focus{
+    outline: none;
+}
+
+.wBlog{
+    border-bottom: 1px dashed purple;
+    margin-bottom: 3%;
+    padding-bottom: 3% ;
+}
+
+@media screen and (max-width : 500px) {
+    .wrBlog{
+        overflow: scroll;
+    }
+}
+
+.instructionWrBlog{
+    text-align: justify;
+    font-size: large;
+}

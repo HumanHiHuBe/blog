@@ -14,7 +14,7 @@ class CategoryClass(models.Model):
 
 class Article(models.Model):
     category = models.ForeignKey(CategoryClass, on_delete = models.CASCADE, default = True)
-    title = models.CharField(max_length = 200)
+    title = models.CharField(max_length = 200, unique=True)
     short_description = models.CharField(max_length = 1000)
     content = RichTextField()
     time_modified = models.DateTimeField(auto_now = True)

@@ -7,11 +7,25 @@ class ArticleForm(ModelForm):
     class Meta:
         model = Article
         fields = ['category', 'title', 'short_description', 'content']
+        labels = {
+            'category' : "Select Category",
+            'content' : 'Blog Content'
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Add Title'}),
+            'short_description': forms.TextInput(attrs={'placeholder': 'Short Description'}),
+        }
 
 class VocabForm(ModelForm):
     class Meta:
         model = Vocab
         fields = ['voc']
+        labels = {
+            'voc' : "Vocabs"
+        }
+        widgets = {
+            'voc': forms.Textarea(attrs={'placeholder': 'Add Your Vocabs Here'}),
+        }
 
 class CommentForm(ModelForm):
     class Meta:

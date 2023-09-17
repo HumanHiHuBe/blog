@@ -159,7 +159,6 @@ def writeblog(request):
         form1 = ArticleForm(request.POST)
         if form1.is_valid():
             model1 = form1.save(commit= False)
-            # model1.save()
             form2 = VocabForm(request.POST)
             if form2.is_valid():
                 model2 = form2.save(commit=False)
@@ -179,7 +178,7 @@ def writeblog(request):
                 return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg': 'Field Error, Please correct and resubmit.'})
         else:
             return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg': 'Field Error, Please correct and resubmit.'})
-        return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg': 'Saved Sucessfully', 'model1': model1})
+        return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg': 'Saved Sucessfully.', 'model1':model1})
     else:
         return render(request, 'blogapp/writeblog.html', {'form1': ArticleForm(), 'form2':VocabForm(), 'msg':''})
 
@@ -204,22 +203,8 @@ def comment(request):
             for i in coment_list:
                 final_list.append([i, Reply.objects.filter(original_comment = i)])
             return redirect('detailedblog', blog_id = d.id)
-            # return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
         else:
             return redirect('detailedblog', blog_id = d.id)
-
-            # com_form = CommentForm()
-            # rep_form = ReplyForm()
-            # likedUserList = d.liked_user.all()
-            # d1 = Vocab.objects.get(article_title = d)
-            # s = str(d1.voc)
-            # w = function_to_render_correct_word_meaning(s)
-            # w = w[0]
-            # coment_list = Comment.objects.filter(article_tit = d)
-            # final_list = []
-            # for i in coment_list:
-            #     final_list.append([i, Reply.objects.filter(original_comment = i)])
-            # return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list, 'msg':'Please Correct The Input And Re-Submit'})
     else:
         return HttpResponse("<h1>Forbidden</h1>")
 
@@ -248,21 +233,8 @@ def reply(request):
             for i in coment_list:
                 final_list.append([i, Reply.objects.filter(original_comment = i)])
             return redirect('detailedblog', blog_id = d.id)
-            # return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list})
         else:
             return redirect('detailedblog', blog_id = d.id)
-            # com_form = CommentForm()
-            # rep_form = ReplyForm()
-            # likedUserList = d.liked_user.all()
-            # d1 = Vocab.objects.get(article_title = d)
-            # s = str(d1.voc)
-            # w = function_to_render_correct_word_meaning(s)
-            # w = w[0]
-            # coment_list = Comment.objects.filter(article_tit = d)
-            # final_list = []
-            # for i in coment_list:
-            #     final_list.append([i, Reply.objects.filter(original_comment = i)])
-            # return render(request, 'blogapp/detailedblog.html', {'com_form':com_form, 'rep_form':rep_form, 'article':d, 'words': w, 'likedUserList':likedUserList, 'final_list':final_list, 'msg':'Please Correct The Input And Re-Submit'})
     else:
         return HttpResponse("<h1>Forbidden</h1>")
 
