@@ -1,4 +1,5 @@
 from dataclasses import fields
+from django import forms
 from django.forms import ModelForm
 from .models import Article, Vocab, Comment, Reply
 
@@ -16,9 +17,21 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['comment_text']
-
+        labels = {
+            'comment_text' : "Add comments on this post"
+        }
+        widgets = {
+            'comment_text': forms.TextInput(attrs={'placeholder': 'Add Comment'}),
+        }
+        
 class ReplyForm(ModelForm):
     class Meta:
         model = Reply
         fields = ['reply_text']
+        labels = {
+            'reply_text' : "Reply to above comment"
+        }
+        widgets = {
+            'reply_text': forms.TextInput(attrs={'placeholder': 'Reply'}),
+        }
 

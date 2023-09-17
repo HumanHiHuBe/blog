@@ -159,7 +159,11 @@
     margin: 2vh;
     white-space: nowrap;
     object-fit: contain;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+
 
 @media screen and (max-width : 500px) {
     .bloglist .indBlog{
@@ -238,6 +242,7 @@
 .indbloglists{
     border-top: 2px dashed purple;
     padding-top: 3vh;
+    padding-bottom: 1rem;
 }
 
 .shortdesc{
@@ -336,6 +341,14 @@
 
 /* Last page (detailed Blog page) */
 /* For laptop */
+
+.right{
+    border-top: 2px solid purple;
+    margin-top: 10%;
+    padding: 5%;
+    width: 100%;
+}
+
 @media screen and (min-width : 500px) {
     #dBlogWr{
         border: 3px dashed purple;
@@ -345,6 +358,7 @@
         flex: 1,1, auto;
         text-decoration: none;
         font-size: 1.8rem;
+        margin-bottom: 10px;
         
     }
     
@@ -367,6 +381,7 @@
         width: 30%;
         padding: 10px;
         text-decoration: none;
+        border-top: none;
     }
 
     .right a{
@@ -449,6 +464,112 @@
 #likedUserDiv{
     flex: 1,1, auto;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-    padding-right: 100px;   
+}
+
+.cDiv{
+    flex: 1,1 auto;
+    text-align: center;
+    font-weight: 400;
+    font-size: larger;
+    margin: 2%;
+}
+
+.commForm > button{
+    border: 1px solid purple;
+    width: max-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+
+}
+.replyDiv > form > button{
+    border: 1px solid purple;
+    width: max-content;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    background: linear-gradient(93.51deg, rgb(124, 71, 235) 10.94%, rgb(233, 53, 161) 86.95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    
+}
+.commForm > button:hover{
+    box-shadow: 0 5px 15px rgba(130, 39, 122, 0.4);
+
+}
+.replyDiv > form > button:hover{
+    box-shadow: 0 5px 15px rgba(130, 39, 122, 0.4);
+
+}
+
+@media screen and (max-width : 500px) {
+    .commentAndReplyDiv input{
+        width:90%;
+    }
+    
+    .commForm input{
+        width: 90%;
+    }
+}
+
+.commentAndReplyDiv input{
+    border: none;
+    border-bottom: 1px solid purple;
+    padding: 5px;
+    color: purple;
+    font-size: large;
+
+}
+
+.commForm input{
+    border: none;
+    border-bottom: 1px solid purple;
+    padding: 5px;
+    color: purple;
+    font-size: large;
+}
+
+.commForm input:focus{
+    outline: none;
+}
+
+.commentAndReplyDiv input:focus{
+    outline: none;   
+}
+
+.cUserC{
+    display: inline;
+    font-weight: 300;
+    font-size: larger;
+}
+
+.replyOfCommentDiv{
+    padding-left: 2rem;
+}
+
+.cUserR{
+    display: inline;
+    font-weight: lighter;
+    font-size: larger;
+}
+
+.right{
+    text-align: justify;
 }

@@ -31,65 +31,67 @@
         <br>
         <div style="flex: 1,1,auto; border-bottom: 2px dashed purple;"></div>
         
-
-        <span>-------------Comment & Reply----------</span> <br>
-        <form action="{% url 'comment' %}" method="post">
-            {% csrf_token %}
-            {{ com_form }}
-            <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-            <!-- <input type="submit" value="Comment"> -->
-            <button type="submit">Comment</button>
-        </form>
-
-
-
-        <br>
-        {% for i in final_list %}
-        {% for j in i %}
-        {% if forloop.first %}
-        {{ j.commented_user }} <br>
-        {{ j.comment_text }} <br>
-        <div class="ReplyDiv">
-            <form action="{% url 'reply' %}" method="post">
+        <div class="commentAndReplyDiv">
+            <div class="cDiv">Comments & Replies</div>
+            <form action="{% url 'comment' %}" method="post" class="commForm">
                 {% csrf_token %}
-                {{ rep_form }}
+                {{ com_form }}
                 <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-                <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
-                <!-- <input type="submit" value="Reply"> -->
-                <button type="submit">Reply</button>
+                <button type="submit">Comment</button>
             </form>
-        </div>
-        {% endif %}
-        {% if forloop.last %}
-        {% for k in j %}
-        <blockquote>
-            {{ k.replying_user }} <br>
-            {{ k.reply_text }} <br>
-            <div class="ReplyDiv">
-                <form action="{% url 'reply' %}" method="post">
-                    {% csrf_token %}
-                    {{ rep_form }}
-                    <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
-                    <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
-                    <!-- <input type="submit" value="Reply"> -->
-                    <button type="submit">Reply</button>
-                </form>
+
+            <br>
+            {% if newVar %}
+            <span style="font-weight: bold;"> Comments from other users: </span><br>
+            {% endif %}
+            {% for i in final_list %}
+            <div class="indComm">
+                {% for j in i %}
+                {% if forloop.first %}
+                Commented by: <div class="cUserC"> {{ j.commented_user }} </div><br>
+                Comment: <div class="cUserC"> {{ j.comment_text }} </div><br>
+                <div class="replyDiv">
+                    <form action="{% url 'reply' %}" method="post" class="commForm">
+                        {% csrf_token %}
+                        {{ rep_form }}
+                        <input type="text" name="com_article" id="" value="{{ article.id }}" hidden>
+                        <input type="text" name="orig_com" id="" value="{{ j.id }}" hidden>
+                        <button type="submit">Reply</button>
+                    </form>
+                </div>
+                {% endif %}
+                {% if forloop.last %}
+                <div class="replyOfCommentDiv">
+                    {% for k in j %}
+                    <blockquote>
+                        {% if forloop.first %}
+                        <span style="font-size:1rem ; font-weight:bold ;">Replies to above comment: </span><br>
+                        {% endif %}
+                        Replied by: <div class="cUserR"> {{ k.replying_user }} </div><br>
+                        Reply: <div class="cUserR"> {{ k.reply_text }} </div><br>
+                    </blockquote>
+                    {% endfor %}
+                </div>
+                    {% endif %}
+                {% endfor %}
+                {% if not forloop.last %}
+                    <span style="color: purple;">-------------------------</span>
+                {% endif %}
             </div>
-        </blockquote>
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
+            {% endfor %}
+            
+        </div>
+            {% endif %}   
     </div>
+
     <div class="right">
-        <span>Vocab For The Article</span> <br> <br>
+        <div class="tDiv">Vocab For The Article </div> <br>
         <span>Meaning of the words shown here <span>(if any)</span> are provided by <strong>author</strong> of the Blog.
-            <br> <strong>BlogForVocab</strong> does <strong>Not</strong> take any responsibities of these meanings. <br>
+            <br> <strong>BlogForVocab</strong> does <strong>Not</strong> take any responsibities of these meanings. <br> <br> <br>
             Click on the word link for more information about the word. <br> </span> <br>
         {{ msg }}
         {% for i in words %}
-        <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
+        &#x2022; <a href="{% url 'individualvocab' i.word %}">{{ i.word }}</a> - {{ i.meaning }} <br>
         {% endfor %}
     </div>
 </div>
