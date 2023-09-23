@@ -3,6 +3,7 @@ db.sqlite3
 blogapp/__pycache__
 Blog/__pycache__
 blogapp/migrations
+blogapp/enc
 /media
 createData.py
 data.json
