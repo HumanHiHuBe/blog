@@ -2,19 +2,16 @@
 {% load static %}
 {% block title %} BlogForVocab {% endblock %}
 
-
-
-
 {% block content %}
-
+<script type="xml">
+  {{ def }}
+</script>
 <div class="detailedVocab">
-
   <div class="tDiv">Detailed explaination of the word</div>
-
-  {% if def %}
-  <div class="lD"> Definition: </div>
+  {% if res %}
+  <div class="lD"></div>
   <div class="rLd">
-    {{ word }} - ( {{ cat }} ) {{ def }}.
+    {{ res|safe }}
   </div>
   {% else %}
   <div class="rLd">
@@ -22,27 +19,6 @@
   </div>
   {% endif %}
 
-  {% if pro %}
-  <div class="lD">Play the pronunciation:</div>
-  <div class="rLd">
-    <audio controls>
-      <source src="{{ pro }}" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
-    {% else %}
-    <div class="rLd">
-    </div>
-  {% endif %}
-
-  {% if ex1 %}
-  <div class="lD">Used Example:</div>
-  <div class="rLd">&#x2022; {{ ex1|capfirst }}.
-  </div>
-  {% else %}
-  <div class="rLd"></div>
-  {% endif %}
-  <div class="rLd">{{ msg }}</div>
 </div>
-
+</xml>
 {% endblock %}

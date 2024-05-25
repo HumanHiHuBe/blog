@@ -127,29 +127,7 @@ def likescount(request):
 #View for Detailed Vocab
 def individualvocab(request, vocab):
     q = word_dictionary(vocab)
-    if int(q[0].status_code) == 200:
-        d = {'word':vocab, 'code':int(q[0].status_code)}
-        v=q[1]
-        try:
-            d['cat'] = v['results'][0]['lexicalEntries'][0]['lexicalCategory']['text']
-        except:
-            pass
-        try:
-            d['def'] = v['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-        except:
-            pass
-        try:
-            d['pro'] = v['results'][0]['lexicalEntries'][0]['entries'][0]['pronunciations'][1]['audioFile']
-        except:
-            pass
-        try:
-            d['ex1'] = v['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['examples'][0]['text']
-        except:
-            pass
-                
-        return render(request, 'blogapp/individualvocab.html', d)
-    else:
-        return render(request, 'blogapp/individualvocab.html', {'word':vocab, 'code':int(q[0].status_code) , 'msg':'Maybe Some Error Occured, Please Retry Only Once If Did Not Work Then Maybe There Is No More Detail Available For Your Searched Word - {}.'.format(vocab)})
+    return render(request, 'blogapp/individualvocab.html', {'res':q})
 
 
 #View for writing blog
